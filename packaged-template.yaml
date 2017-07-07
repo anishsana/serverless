@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  Bye:
+    Properties:
+      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      FunctionName: ByeServerless
+      Handler: serverless.Bye
+      Runtime: java8
+    Type: AWS::Serverless::Function
+  Hello:
+    Properties:
+      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      FunctionName: HelloServerless
+      Handler: serverless.Hello
+      Runtime: java8
+    Type: AWS::Serverless::Function
+  JsonReader:
+    Properties:
+      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      FunctionName: JsonReader
+      Handler: serverless.JsonReader
+      Runtime: java8
+      Timeout: 15
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

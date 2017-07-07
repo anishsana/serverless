@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  Hello:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: HelloServerless
+      Handler: serverless.Hello
+      Runtime: java8
+      CodeUri: ./target/serverless-0.0.1-SNAPSHOT.jar
+  Bye:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ByeServerless
+      Handler: serverless.Bye
+      Runtime: java8
+      CodeUri: ./target/serverless-0.0.1-SNAPSHOT.jar
+  JsonReader:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: JsonReader
+      Handler: serverless.JsonReader
+      Runtime: java8
+      CodeUri: ./target/serverless-0.0.1-SNAPSHOT.jar
+      Timeout: 30
