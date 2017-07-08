@@ -2,24 +2,45 @@ AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   Bye:
     Properties:
-      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      CodeUri: s3://lambda-functions-aws/4420f9d130ba8f1c4ea93ed2a9c04fc3
+      Description: Says Bye
       FunctionName: ByeServerless
       Handler: serverless.Bye
       Runtime: java8
     Type: AWS::Serverless::Function
+  Gradebook:
+    Properties:
+      CodeUri: s3://lambda-functions-aws/4420f9d130ba8f1c4ea93ed2a9c04fc3
+      Description: Populates DynamoDB upon upload to S3
+      FunctionName: LambdaGradebookServerless
+      Handler: serverless.LambdaGradebook
+      MemorySize: 1024
+      Role: arn:aws:iam::837089314695:role/lambda-s3-execution-role
+      Runtime: java8
+      Timeout: 60
+    Type: AWS::Serverless::Function
   Hello:
     Properties:
-      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      CodeUri: s3://lambda-functions-aws/4420f9d130ba8f1c4ea93ed2a9c04fc3
+      Description: Says Hello
       FunctionName: HelloServerless
       Handler: serverless.Hello
       Runtime: java8
     Type: AWS::Serverless::Function
   JsonReader:
     Properties:
-      CodeUri: s3://lambda-functions-aws/5697dff0e5c75218b9d3d41ce67366bf
+      CodeUri: s3://lambda-functions-aws/4420f9d130ba8f1c4ea93ed2a9c04fc3
+      Description: Reads JSON from a URL
       FunctionName: JsonReader
       Handler: serverless.JsonReader
       Runtime: java8
-      Timeout: 15
+      Timeout: 30
     Type: AWS::Serverless::Function
+  LambdaPerm:
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: Gradebook
+      Principal: s3.amazonaws.com
+    Type: AWS::Lambda::Permission
 Transform: AWS::Serverless-2016-10-31

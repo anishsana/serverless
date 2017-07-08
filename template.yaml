@@ -26,3 +26,21 @@ Resources:
       Runtime: java8
       CodeUri: ./target/serverless-0.0.1-SNAPSHOT.jar
       Timeout: 30
+  Gradebook:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: LambdaGradebookServerless
+      Handler: serverless.LambdaGradebook
+      Runtime: java8
+      CodeUri: ./target/serverless-0.0.1-SNAPSHOT.jar
+      Description: Populates DynamoDB upon upload to S3
+      MemorySize: 1024
+      Timeout: 60
+      Role: arn:aws:iam::837089314695:role/lambda-s3-execution-role
+  LambdaPerm:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: Gradebook
+      Principal: s3.amazonaws.com
